@@ -1,0 +1,73 @@
+public class CustomStackArray<T> {
+    private Object[] arr;
+    
+    private int topOfStack;
+    private static final int DEFAULT_SIZE = 10;
+
+    public CustomStackArray() {
+        this(DEFAULT_SIZE);
+    }
+
+    public CustomStackArray(int size) {
+        this.arr = new Object[size];
+        this.topOfStack = -1;
+        System.out.println("The Stack is Created with size of " + size);
+    }
+
+    // isEmpty
+    public boolean isEmpty() {
+        return topOfStack == -1;
+    }
+
+    // isFull
+    public boolean isFull() {
+        return topOfStack == arr.length - 1;
+    }
+
+    // push
+    public void push(T value) {
+        if (isFull()) {
+            System.out.println("Stack is full");
+        } else {
+            arr[++topOfStack] = value;
+            System.out.println("Value is inserted successfully");
+        }
+    }
+
+    // pop
+    @SuppressWarnings("unchecked")
+    public T pop() throws CustomStackException {
+        if (isEmpty()) {
+            throw new CustomStackException("Stack is Empty");
+        } else {
+            return (T) arr[topOfStack--];
+        }
+    }
+
+    // peek
+    @SuppressWarnings("unchecked")
+    public T peek() {
+        if (isEmpty()) {
+            System.out.println("The Stack is Empty");
+            return null;
+        } else {
+            return (T) arr[topOfStack];
+        }
+    }
+
+    // delete
+    public void delete() {
+        arr = null;
+        System.out.println("The Stack is successfully deleted");
+    }
+
+    // traverse
+    @SuppressWarnings("unchecked")
+    public void traverse() {
+        System.out.println("Traversing Stack");
+        for (int i = topOfStack; i >= 0; i--) {
+            System.out.print((T) arr[i] + " - ");
+        }
+        System.out.println();
+    }
+}
